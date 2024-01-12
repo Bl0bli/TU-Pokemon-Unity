@@ -25,6 +25,8 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// Le statut infligé à la cible à la suite de l'attaque
         /// </summary>
         public StatusPotential Status { get; private set; }
+        
+
 
     }
 

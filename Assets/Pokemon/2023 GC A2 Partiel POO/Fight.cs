@@ -47,11 +47,13 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
                 {
                     if(Character1.CurrentHealth > 0)
                     {
-                        Character2.ReceiveAttack(skillFromCharacter1);
+                        bool criticalStrike = Character1.CriticalStrike();
+                        Character2.ReceiveAttack(skillFromCharacter1,criticalStrike);
                     }
                     if(Character2.CurrentHealth > 0)
                     {
-                        Character1.ReceiveAttack(skillFromCharacter2);
+                        bool criticalStrike = Character2.CriticalStrike();
+                        Character1.ReceiveAttack(skillFromCharacter2, criticalStrike);
                     }
                 }
             }
@@ -65,11 +67,13 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
                 {
                     if (Character2.CurrentHealth > 0)
                     {
-                        Character1.ReceiveAttack(skillFromCharacter2);
+                        bool criticalStrike = Character2.CriticalStrike();
+                        Character1.ReceiveAttack(skillFromCharacter2, criticalStrike);
                     }
                     if (Character1.CurrentHealth > 0)
                     {
-                        Character2.ReceiveAttack(skillFromCharacter1);
+                        bool criticalStrike = Character1.CriticalStrike();
+                        Character2.ReceiveAttack(skillFromCharacter1, criticalStrike);
                     }
                 }
             }

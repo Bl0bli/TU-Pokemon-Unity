@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace _2023_GC_A2_Partiel_POO.Level_2
 {
@@ -134,15 +135,30 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// </summary>
         /// <param name="s">skill attaquant</param>
         /// <exception cref="NotImplementedException"></exception>
-        public void ReceiveAttack(Skill s)
+        public void ReceiveAttack(Skill s, bool criticalStrike)
         {
-            if (CurrentHealth - (s.Power - Defense) > 0)
+            if (criticalStrike)
             {
-                CurrentHealth -= (s.Power - Defense);
+                if (CurrentHealth - (s.Power - Defense)*2 > 0)
+                {
+                    CurrentHealth -= (s.Power - Defense)*2;
+                    Debug.Log("Critical Strike");
+                }
+                else
+                {
+                    CurrentHealth = 0;
+                }
             }
             else
             {
-                CurrentHealth = 0;
+                if (CurrentHealth - (s.Power - Defense) > 0)
+                {
+                    CurrentHealth -= (s.Power - Defense);
+                }
+                else
+                {
+                    CurrentHealth = 0;
+                }
             }
         }
         /// <summary>
@@ -172,5 +188,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             }
         }
 
+
+        public bool CriticalStrike()
+        {
+            int attack = Attack;
+            int random = UnityEngine.Random.Range(0, 100);
+            random += attack / 10;
+
+            return random > 50;
+        }
     }
 }
