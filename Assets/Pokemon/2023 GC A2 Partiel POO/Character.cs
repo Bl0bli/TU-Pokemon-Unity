@@ -35,6 +35,7 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
             _baseDefense = baseDefense;
             _baseSpeed = baseSpeed;
             _baseType = baseType;
+            CurrentHealth = MaxHealth;
         }
         /// <summary>
         /// HP actuel du personnage
@@ -48,7 +49,15 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                if (CurrentEquipment != null)
+                {
+                    return _baseHealth + CurrentEquipment.BonusHealth;
+                }
+                else
+                {
+                    return _baseHealth;
+
+                }   
             }
         }
         /// <summary>
@@ -58,7 +67,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                if(CurrentEquipment != null)
+                {
+                    return _baseAttack + CurrentEquipment.BonusAttack;
+                }
+                else
+                {
+                    return _baseAttack;
+                }
             }
         }
         /// <summary>
@@ -68,7 +84,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                if (CurrentEquipment != null)
+                {
+                    return _baseDefense + CurrentEquipment.BonusDefense;
+                }
+                else
+                {
+                    return _baseDefense;
+                }
             }
         }
         /// <summary>
@@ -78,7 +101,15 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         {
             get
             {
-                throw new NotImplementedException();
+                if (CurrentEquipment != null)
+                {
+                    return _baseSpeed + CurrentEquipment.BonusSpeed;
+                }
+                else
+                {
+                    return _baseSpeed;
+                }
+
             }
         }
         /// <summary>
@@ -90,7 +121,10 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// </summary>
         public StatusEffect CurrentStatus { get; private set; }
 
-        public bool IsAlive => throw new NotImplementedException();
+        public bool IsAlive()
+        {
+            return CurrentHealth > 0;
+        }
 
 
         /// <summary>
@@ -102,7 +136,14 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="NotImplementedException"></exception>
         public void ReceiveAttack(Skill s)
         {
-            throw new NotImplementedException();
+            if (CurrentHealth - (s.Power - Defense) > 0)
+            {
+                CurrentHealth -= (s.Power - Defense);
+            }
+            else
+            {
+                CurrentHealth = 0;
+            }
         }
         /// <summary>
         /// Equipe un objet au personnage
@@ -111,14 +152,24 @@ namespace _2023_GC_A2_Partiel_POO.Level_2
         /// <exception cref="ArgumentNullException">Si equipement est null</exception>
         public void Equip(Equipment newEquipment)
         {
-            throw new NotImplementedException();
+            if(newEquipment == null)
+            {
+                throw new ArgumentNullException();
+            }
+            else
+            {
+                CurrentEquipment = newEquipment;
+            }
         }
         /// <summary>
         /// Desequipe l'objet en cours au personnage
         /// </summary>
         public void Unequip()
         {
-            throw new NotImplementedException();
+            if(CurrentEquipment != null)
+            {
+                CurrentEquipment = null;
+            }
         }
 
     }
